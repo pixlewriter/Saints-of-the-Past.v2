@@ -1,0 +1,16 @@
+{% extends "saints_website/base.html" %}
+
+{% block content %}
+
+    <p>{{ topic }}</p>
+
+
+    <ul>
+        {% for entry in entries %}
+            <li>{{ entry.text }}</li>
+        {% empty %}
+            <li>Nothing on the saint has been added yet.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

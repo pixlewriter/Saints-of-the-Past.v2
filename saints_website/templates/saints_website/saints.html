@@ -1,0 +1,17 @@
+{% extends "saints_website/base.html" %}
+
+{% block content %}
+
+    <p>Saints</p>
+
+    <ul>
+        {% for topic in topics %}
+            <li>
+                <a href="{% url 'saints_website:saint' saint.id %}">{{ topic }}</a>
+            </li>
+        {% empty %}
+            <li>No saints have been added yet.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}
