@@ -1,0 +1,120 @@
+{% extends "saints_website/base.html" %}
+{% load custom_tags %}
+{% block content %}
+
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" name="run_script" class="btn btn-{{first_color}}">link view</button>
+</form>
+<form method="get">
+    {% csrf_token %}
+    <button type="submit" name="run_script" class="btn btn-{{second_color}}">image view</button>
+</form>
+<!--<script type="text/javascript">
+    function toggle(){
+        var image_view = "{{ image_view }}"
+        if (image_view == "True") {
+            image_view = false
+        } else if (image_view == "False"){
+            image_view == true
+        }
+        return image_view
+        
+    }
+</script> -->
+
+
+<table border="1" bordercolor="#00f0c0" cellspacing="0" cellpadding="0" align="center">
+    <tbody>
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0" align="center" border="1" width="200">
+                    <tbody>
+                        <tr>
+                            <td align="center" bgcolor="#00f0c0"> &nbsp;</td>
+                            <td colspan="5" align="center" bgcolor="#00f0c0">
+                                <font size="3" face="Tahoma">
+                                    <script type="text/javascript">
+                                        var monthNames = ["January", "February", "March", "April", "May", "June",
+                                            "July", "August", "September", "October", "November", "December"
+                                            ];
+
+                                        var d = new Date();
+                                        document.write(monthNames[d.getMonth()]," ", d.getFullYear());
+                                    </script>
+                                </font>
+                            </td>
+                            <td align="center" bgcolor="#00f0c0">&nbsp;  </td>
+                        </tr>
+                        <tr>
+                            <td width = "125"> <font size="3" face="Tahoma"> <b>Sunday</b> </font> </td>
+                            <td width = "125"> <font size="3" face="Tahoma"> <b>Monday</b> </font> </td>
+                            <td width = "125"> <font size="3" face="Tahoma"> <b>Tuesday</b> </font> </td>
+                            <td width = "125"> <font size="3" face="Tahoma"> <b>Wednesday</b> </font> </td>
+                            <td width = "125"> <font size="3" face="Tahoma"> <b>Thursday</b> </font> </td>
+                            <td width = "125"> <font size="3" face="Tahoma"> <b>Friday</b> </font> </td>
+                            <td width = "125"> <font size="3" face="Tahoma"> <b>Saturday</b> </font> </td>
+                        </tr>
+                        {% for day in days %}
+                            {% if day == "8" or day == "15" or day == "22" or day == "29" %}
+                                <tr height = "125">
+                            {% endif %}
+                            {% if day != "0" %}
+                            <td width = "125"> 
+                                {% for saint in saints %}
+                                        {% if saint.m_feast == month %}
+                                            {% if day == saint.d_feast %}
+                                                {% if  image_view %}
+                                                    {% if not image_found %}
+                                                        <font size="2" face="Tahoma"> <b>{{saint.d_feast}}</b> </font>
+                                                    {% endif %}
+                                                    <button type="button" class="btn btn-link">
+                                                        <a href="{% url 'saints_website:saint' saint.id %}">
+                                                            <img src = "{{ saint.cal_Image.url }}"
+                                                            height = "125"
+                                                            width = "125"/> 
+                                                        </a>
+                                                    </button>
+                                                    {% setvar True as found %}
+                                                    {% setvar True as image_found%}
+                                                {% else %}
+                                                    {% if not image_found %}
+                                                            <font size="2" face="Tahoma"> <b>{{saint.d_feast}}</b> </font>
+                                                        {% endif %}
+                                                        <li>
+                                                            <font size="2 face="Tahoma>
+                                                                <a href="{% url 'saints_website:saint' saint.id %}">{{saint.status}}. {{ saint }}</a>
+                                                            </font>
+                                                        </li>
+                                                    {% setvar True as found %}
+                                                    {% setvar True as image_found%}
+                                                {% endif %}
+                                                
+                                            {% elif not image_found%}
+                                                <font size="2" face="Tahoma"> <b>{{day}}</b> </font>
+                                                {% setvar True as image_found%}
+                                            {% else %}
+                                                &nbsp;
+                                            {% endif %}
+                                        {% elif not image_found %}
+                                            <font size="2" face="Tahoma"> <b>{{day}}</b> </font>
+                                            {% setvar True as image_found%}
+                                        {% else %}
+                                            &nbsp;
+                                        {% endif %}
+                                {% endfor %}
+                                </td>    
+                            {% else %}
+                                <tr width = "125">
+                            {% endif %}
+                        {% endfor %}
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock content %}
+    

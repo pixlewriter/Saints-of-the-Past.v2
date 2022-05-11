@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #third party apps
+    'bootstrap4',
+
     # My apps
     'saints_website',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +71,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+        'libraries':{
+            'customtags': 'saints_website.templatetags.custom_tags',
+        }
         },
     },
 ]
@@ -79,7 +87,7 @@ WSGI_APPLICATION = 'saints_of_the_past.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR , 'db.sqlite3'),
     }
 }
 
@@ -120,9 +128,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
+MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
+STATICFILES_DIRS = STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
+MEDIA_ROOT = (
+BASE_DIR
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_REDIRECT_URL='/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+#settings for django-bootstrap3
+BOOTSTRAP4 = {
+    'include_jquery': True,
+}

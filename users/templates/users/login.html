@@ -1,0 +1,20 @@
+{% extends "saints_website/base.html" %}
+{% load bootstrap4 %}
+
+{% block header %}
+    <h2>Log in to your Account.</h2>
+{% endblock header %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'users:login' %}" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        {% buttons %}
+            <button name="submit" class="btn btn-primary">log in</button>
+        {% endbuttons %}
+
+        <input type="hidden" name="text" value="{% url 'saints_website:index' %}" />
+    </form>
+{% endblock content %}

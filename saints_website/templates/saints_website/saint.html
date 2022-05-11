@@ -1,16 +1,27 @@
 {% extends "saints_website/base.html" %}
-
+{% load custom_tags %}
 {% block content %}
 
-    <p>{{ topic }}</p>
-
-
-    <ul>
+    <figure>
+        <img src = "{{ saint.image.url }}"
+        height = "250"
+        width = "150"
+        alt = "Picture of Joan of /n Arc" 
+        />
+        <figcaption>{{saint.credit}}</figcaption>
+    </figure>
+    
+    <pre>{{saint.status}}. {{ saint }}          {{saint.birth}} - {{saint.death}}</pre>
+    </br>
+    </br>
         {% for entry in entries %}
-            <li>{{ entry.text }}</li>
+            {% splice entry.text as paragraphs%}
+            {% for paragraph in paragraphs %}
+                <p>{{paragraph}}</p>
+            {% endfor %}
+
         {% empty %}
-            <li>Nothing on the saint has been added yet.</li>
+            {% lorem 4 p%}
         {% endfor %}
-    </ul>
 
 {% endblock content %}

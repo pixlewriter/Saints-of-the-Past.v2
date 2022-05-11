@@ -1,0 +1,16 @@
+{% extends "saints_website/base.html" %}
+
+{% block content %}
+    {% for prayer in prayers %}
+        <figure>
+            <img src = "{{ prayer.prayer.url }}"
+            height = "{{ prayer.prayer.height }}"
+            width = "{{ prayer.prayer.width }}"
+            alt = "{{ prayer.alt }}" 
+            />
+            <figcaption>{{prayer.credit}}</figcaption>
+        </figure>
+    {% endfor %}
+
+{% endblock content %}
+

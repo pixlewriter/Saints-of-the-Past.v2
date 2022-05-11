@@ -1,13 +1,18 @@
 {% extends "saints_website/base.html" %}
 
 {% block content %}
-
+    
     <p>Saints</p>
-
+    
     <ul>
-        {% for topic in topics %}
+        {% for saint in saints %}
             <li>
-                <a href="{% url 'saints_website:saint' saint.id %}">{{ topic }}</a>
+                <img src = "{{ saint.thumbnail.url }}"
+                     height = "50"
+                     width = "50"
+                     alt = "Picture of Joan of Arc" />
+                    <a href="{% url 'saints_website:saint' saint.id %}">{{saint.status}}. {{ saint.text}} - - {{saint.birth}} - {{saint.death}}</a>
+                
             </li>
         {% empty %}
             <li>No saints have been added yet.</li>

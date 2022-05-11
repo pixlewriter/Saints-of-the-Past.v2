@@ -1,0 +1,32 @@
+{% extends "saints_website/base.html" %}
+
+{% block content %} 
+    <h1>Search</h1>
+    
+    <ul>
+    {% for saint in results %}
+        <li>
+            <img src = "{{ saint.thumbnail.url }}"
+            height = "50"
+            width = "50"
+            alt = "" />
+           <a href="{% url 'saints_website:saint' saint.id %}">{{saint.status}}. {{ saint.text}} - - {{saint.birth}} - {{saint.death}}</a>
+        </li>
+    {% empty %}
+        {% if query == 'None'%}
+        {% else %}
+            <p>"{{query}}" could not be found. Have a suggestion on a new saint? Please email -----------</p>
+            Here are some tips for a succesful search result
+            <ul>
+                <li>
+                    dates should be in YYYY-MM-DD format
+                </li>
+                <li>
+                    when serching up a saint do not include St. or Bl.
+                </li>
+            </ul>
+        {% endif %}
+        
+    {% endfor %}
+    </ul>
+{% endblock content %}
