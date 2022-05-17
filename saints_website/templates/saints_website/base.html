@@ -39,24 +39,23 @@
             <div class="container">
                 
 
-                <a class="navbar-brand" href="{% url 'saints_website:index' %}">Sain♰s of the Past</a>
-                <a href="{% url 'saints_website:saints' %}">Saints</a>
-                <a href="{% url 'saints_website:prayers' %}">Prayers</a>
-                <a href="{% url 'saints_website:calendar' %}">Calendar</a>
+                <a style ="font-size: 200%;" class="navbar-brand" href="{% url 'saints_website:index' %}">Sain♰s of the Past</a>
+                <a class="navbar-brand" href="{% url 'saints_website:saints' %}">Saints</a>
+                <a class="navbar-brand" href="{% url 'saints_website:prayers' %}">Prayers</a>
+                <a class="navbar-brand" href="{% url 'saints_website:calendar' %}">Calendar</a>
 
                 {% if user.is_authenticated %}
                     <h6><a>Hello, {{ user.username }}.</a></h6>
-                    <h6><a href="{% url 'users:logout' %}">log out</a></h6>
+                    <h6><a class="navbar-brand" href="{% url 'users:logout' %}">log out</a></h6>
                 {% else %}
                     <div class="navbar-header">
                         <button type="button" class="btn btn-primary"
                             data-toggle="collapse" data-target="#navbar"
                             aria-expanded="false" aria-controls="navbar">
-                        log in    
+                            <a style="color: white;"href="{% url 'users:login' %}">Log in</a>  
                         </button>
                     </div>
-                    <h6 id="navbar"><a href="{% url 'users:register' %}">register</a></h6>
-                    <h6 id="navbar"><a href="{% url 'users:login' %}">Log in</a></h6>        
+                    <h6 id="navbar"><a href="{% url 'users:register' %}">register</a></h6>       
                 {% endif %}
 
                 <div class="navbar-brand">

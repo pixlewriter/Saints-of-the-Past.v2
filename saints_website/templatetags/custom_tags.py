@@ -21,17 +21,15 @@ def add_to(val, by):
 def toggle(bool):
   if bool == True:
     bool = False
-    print(bool, 1)
   elif bool == False:
     bool = True
-    print(bool, 1)
   else:
     print(f"Bool cannot be turned into a bool: {bool}")
   return bool
 
 @register.simple_tag()
 def splice(text):
-  
+  text += "This text does not matter"
   html = []
   paragraph = []
   word = ""
@@ -39,7 +37,6 @@ def splice(text):
     if word != " /n":
       
       if charchter == " ":
-        print(word)
         paragraph.append(word)
         word = " "
       else:
@@ -47,12 +44,17 @@ def splice(text):
     else:
       word = ""
       html_p = ""
-      print("this worked")
       for p_word in paragraph:
         html_p += p_word
-        print("this worked")
-      print(html_p)
       html.append(html_p)
       paragraph = []
   print(html)
   return html
+
+@register.simple_tag()
+def makeSummary(entry):
+  return entry[:150] + "..."
+
+@register.simple_tag()
+def makeStr(val):
+  return str(val)

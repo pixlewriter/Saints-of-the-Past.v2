@@ -11,6 +11,7 @@ crsr = connection.cursor()
 class Saint(models.Model):
     """              """
     text = models.CharField(max_length=200)
+    summary = models.TextField(default="",blank=True)
     status = models.CharField(max_length=2, default="",blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
     birth = models.DateField('birth Y-m-d')
@@ -36,6 +37,8 @@ class Entry(models.Model):
 
     def __str__(self):
         return self.text[:50] + "..."
+
+
 
 class Prayer(models.Model):
     image = models.ImageField()

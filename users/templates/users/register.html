@@ -5,7 +5,9 @@
     {% csrf_token %}
     {{form.as_p}}
 
-    <button name="submit">register</button>
+    <button name="submit" type="button" class="btn btn-primary"
+        data-toggle="collapse" data-target="#navbar"
+        aria-expanded="false" aria-controls="navbar">register</button>
     <input type="hidden" name="text" value="{% url 'saints_website:index' %}" />
     </form>
 {% endblock content %}

@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 
 
 
-from .models import Calendar, Saint, Prayer
+from .models import Calendar, Saint, Prayer, Entry
 def can_be_coverted(conversion, thing):
     try:
         conversion(thing)
@@ -22,7 +22,8 @@ def index(request):
 
 def saints(request):
     saints = Saint.objects.order_by('text')
-    context = {'saints': saints}
+    entries = Entry.objects.order_by('text')
+    context = {'saints': saints,'entries':entries}
     return render(request, 'saints_website/saints.html', context)
 
 def saint(request, saint_id):

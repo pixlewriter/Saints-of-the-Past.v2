@@ -1,11 +1,20 @@
 {% extends "saints_website/base.html" %}
-
+{%load custom_tags%}
 {% block content %}
     
     <p>Saints</p>
     
-    <ul>
+        
+        {% setvar True as row %}
         {% for saint in saints %}
+            {% if row == True %}
+                <main class="container">
+                    <div class="row mb-2">
+            {% endif %}
+            {% toggle row as row %}
+            
+            
+        <!--
             <li>
                 <img src = "{{ saint.thumbnail.url }}"
                      height = "50"
@@ -14,9 +23,41 @@
                     <a href="{% url 'saints_website:saint' saint.id %}">{{saint.status}}. {{ saint.text}} - - {{saint.birth}} - {{saint.death}}</a>
                 
             </li>
+        -->
+                        <div class="col-md-6">
+                            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h3 class="mb-0">{{saint.status}}. {{ saint.text}}</h3>
+                                <div class="mb-1 text-muted">{{saint.birth}} - {{saint.death}}</div>
+                                <p class="card-text mb-auto">
+                                    {%for entry in entries%}
+                                        {%if entry.saint_id == saint.id%}
+                                            {% makeSummary entry.text as summary %}
+                                            {{summary}}
+                                        {% endif %}
+                                    {% empty %}
+                                        {% lorem 4 p%}
+                                    {% endfor %}
+                                    
+                                </p>
+                                <a href="{% url 'saints_website:saint' saint.id %}" class="stretched-link">Continue reading</a>
+                            </div>
+                            <div class="col-auto d-none d-lg-block">
+                                <img src = "{{ saint.image.url }}"
+                                    height = "250"
+                                    width = "150"
+                                    alt = "Picture of Joan of Arc" />
+                            </div>
+                            </div>
+                        </div>
+            
+            {% if row == True %}
+                    </div>
+                </main>
+            {% endif %}
         {% empty %}
             <li>No saints have been added yet.</li>
         {% endfor %}
-    </ul>
+        </div>
 
 {% endblock content %}
