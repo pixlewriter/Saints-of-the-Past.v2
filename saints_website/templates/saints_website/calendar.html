@@ -45,7 +45,8 @@
 </script> -->
 
 <!-- VARIABLES -->
-{% setvar "200px" as WIDTH %}
+{% setvar "148.5px" as WIDTH %}
+{% setvar "239.75px" as HEIGHT %}
 
 <table border="1" bordercolor="#00f0c0" cellspacing="0" cellpadding="0" align="center">
     <tbody>
@@ -80,7 +81,7 @@
                         </tr>
                         {% for day in days %}
                             {% if day == "1" or day == "8" or day == "15" or day == "22" or day == "29" %}
-                                <tr height={{WIDTH}}>
+                                <tr height={{HEIGHT}}>
                             {% endif %}
                             {% if day != "0" %}
                                 <td width = {{ WIDTH }} 
@@ -93,7 +94,7 @@
                                             {% if day == saint.d_feast %}
                                                 {% if  image_view %}
                                                     {% if not image_found %}
-                                                        <font size="2" face="Tahoma"> <b>{{saint.d_feast}}</b> </font>
+                                                        <font size="2" align = "center"> <b>{{saint.d_feast}}</b> </font>
                                                     {% endif %}
                                                     <button type="button" class="btn btn-link">
                                                         <a href="{% url 'saints_website:saint' saint.id %}">
@@ -106,11 +107,11 @@
                                                     {% setvar True as image_found%}
                                                 {% else %}
                                                     {% if not image_found %}
-                                                            <font size="2" face="Tahoma"> <b>{{saint.d_feast}}</b> </font>
+                                                            <font size="2" > <b>{{saint.d_feast}}</b> </font>
                                                         {% endif %}
                                                         <li>
-                                                            <font size="2 face="Tahoma>
-                                                                <a href="{% url 'saints_website:saint' saint.id %}">{{saint.status}}. {{ saint }}</a>
+                                                            <font size="2" >
+                                                                    <a  class="text-primary" style = "text-decoration: solid;"href="{% url 'saints_website:saint' saint.id %}">{{saint.status}}. {{ saint }}</a>
                                                             </font>
                                                         </li>
                                                     {% setvar True as found %}
@@ -118,13 +119,13 @@
                                                 {% endif %}
                                                 
                                             {% elif not image_found%}
-                                                <font size="2" face="Tahoma"> <b>{{day}}</b> </font>
+                                                <font size="2" > <b>{{day}}</b> </font>
                                                 {% setvar True as image_found%}
                                             {% else %}
                                                 &nbsp;
                                             {% endif %}
                                         {% elif not image_found %}
-                                            <font size="2" face="Tahoma"> <b>{{day}}</b> </font>
+                                            <font size="2" > <b>{{day}}</b> </font>
                                             {% setvar True as image_found%}
                                         {% else %}
                                             &nbsp;
@@ -132,7 +133,7 @@
                                 {% endfor %}
                                 </td>    
                             {% else %}
-                                <tr height={{WIDTH}}>
+                                <tr height={{HEIGHT}}>
                             {% endif %}
                         {% endfor %}
                         </tr>
